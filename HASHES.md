@@ -2,7 +2,7 @@
 
 Every hash posted to X and Reddit, in order, from genesis. Each is also anchored to Bitcoin.
 
-Days 17–19 September are hashes of the sealed envelope itself. From 21 September onward the
+Days 17–20 September are hashes of the sealed envelope itself. From 21 September onward the
 posted hash covers that day's commitment file (see RULE.md §5); the envelope hash is recorded
 inside it. Genesis (17 September) sealed the rule before any coin was chosen and posted nothing.
 
