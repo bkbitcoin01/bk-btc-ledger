@@ -43,7 +43,18 @@ Use `printf '%s'`, not `echo`: a `%` inside a return like `+50.5%` will otherwis
 
 ## Checking completeness
 
-Each day's commitment file lists **every** item that day contained, by index and level, with no contents. Count the items marked `CLOSED` against the lines actually published for that day. An item that was committed, is past its eligibility date, and has never appeared is a failure of the rule — and it is countable without my help.
+Each day's commitment file lists **every** item that day contained, by index and level, with no contents. Count the items against the lines actually published for that day. An item that was committed, is past its eligibility date, and has never appeared is a failure of the rule — and it is countable without my help.
+
+**Which items are due, and when** — this determines what to count, so it is stated rather than left to interpretation:
+
+| Item | Becomes due |
+|---|---|
+| Header lines (date, allocation, code fingerprints, BTC IN, BTC TODAY) | 90 days after the day they were sealed |
+| A closed position's line | 90 days after that position closed |
+| **The open lines of a position that has since closed** | **90 days after it closed — the whole trail reveals together** |
+| The open lines of a position still held | 180 days after entry (the backstop in RULE.md §3) |
+
+The third row is the one worth stating plainly: when a position closes, the earlier days on which it was merely *open* are released too. Without that, those days could never reach zero unrevealed items and completeness could not be checked. Every sealed day therefore resolves eventually.
 
 ## Canonical form
 

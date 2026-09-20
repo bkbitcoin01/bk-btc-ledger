@@ -27,6 +27,7 @@ The full rule is in **[RULE.md](RULE.md)**. Its hash is anchored to Bitcoin, so 
 - A position is revealed **90 days after it closes**.
 - Open positions stay sealed — **except** that any position still open **180 days** after entry is revealed anyway, and the running BTC total (which includes marks on open positions) reveals on the normal schedule. Neither a losing position nor a bad stretch can be hidden by simply never closing it.
 - **I do not choose what to reveal.** The rule decides. A loss publishes on the same schedule as a win.
+- When a position closes, **its whole trail is released** — including the earlier days on which it was only open — so every sealed day eventually resolves to nothing withheld.
 - A missed day is **never backfilled**; the next stamp records the miss and its reason.
 - Publication is continuous. A quarterly page summarises it, but nothing waits for that page.
 
