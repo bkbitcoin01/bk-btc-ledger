@@ -36,5 +36,6 @@ inside it. Genesis (17 September) sealed the rule before any coin was chosen and
 | 2026-10-12 | `d8ea63bd946ceda14108c240d5c04fb0f10c73938a6a17da790a64ea932cd0eb` |
 | 2026-10-13 | `8993ab7172b9d4fc1754e6016db9763eed416afa266a214ed027e482adc71889` |
 | 2026-10-14 | `1ccdd29242b68e957eea16f6a61912e41c078aabecc7f55e11d166e230f0acae` |
+| 2026-10-15 | `49eb4896eb5e74eb28d9470030908139a75241ca842a0b49247412e56557cf09` |
 
 Verify any row: hash the matching file from this repository and compare. See VERIFY.md.
