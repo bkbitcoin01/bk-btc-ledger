@@ -1,4 +1,10 @@
-# THE BK-BTC LEDGER — REVEAL RULE
+# THE BK-BTC LEDGER — RULE
+
+**Dated 18 October 2026 · Version 2.0 · Run 3**
+
+This is the rule of run 3 of the BK-BTC Ledger. It is dated the day it was written so that anyone can see when it was created and what it binds the record to. The public record is one unbroken series of sealed days from 17 September 2026: run 1 (genesis 17 September 2026, closed 11 October 2026) and run 2 (genesis 12 October 2026) both ran under RULE.md 1.0, and this book is the first to number the runs in public. Run 2 ended sealed at its last stamp under RULE.md 1.0; every reveal it owes is still owed and will be published on that rule's schedule. Run 3 begins at 1.000 BTC under this book.
+
+This book differs from RULE.md 1.0 in four things only: the account's idle cash may sit in dollars (§1), the daily envelope carries six new lines (§5), the method's rules are held in a sealed private rulebook (§7), and the slot-sizing sentence in §6 now says what the ledger does: per-slot compounding, as it has since run 2. Everything else is RULE.md 1.0's text. Each addition is marked *(new in this book)* and the one correction *(changed in this book)* where it appears.
 
 ---
 
@@ -14,9 +20,11 @@ If you are looking for proof that this method makes money, this document is not 
 
 ## 1. What the record is
 
-- Began **17 September 2026** (genesis), when the rule was sealed *before* any coin was chosen.
-- **1 BTC** divided into **3 slots of 33.3%**, each buying the highest-rated coin on the Boss Method Scoreboard not already held.
-- A position is held until the system exits it; the freed slot immediately buys the next coin in line.
+- **Genesis** is the first stamp after this document's hash is anchored, with the run starting at **1.000 BTC**. The genesis envelope names this book's version and the version of the method's private rulebook in force (§7). *(new in this book)*
+- **1 BTC** divided into **3 slots of 33.3%**, each buying the coin the method rates highest that it does not already hold.
+- A position is held until the method exits it. A freed slot buys the next coin in line when the method allows a buy; the method may also decline to buy for a time, and says nothing public about when or why. *(new in this book; RULE.md 1.0 said the freed slot buys immediately)*
+- **The account's idle cash sits in Bitcoin or in a dollar stablecoin (USDT), as the method's rule directs.** While it sits in dollars, no new coin is bought. Every move between the two is a dated, logged event, recorded with the amount, the exchange rate used and its source, sealed with the day and revealed on the schedule in §3. The record stays denominated in Bitcoin: parked dollars are valued in Bitcoin at the day's rate, and the dollar value of the whole account is shown beside the Bitcoin total, never in its place. *(new in this book)*
+- **The record is gross.** No fee, slippage or conversion cost is computed or shown. *(new in this book)*
 - Every trading day is stamped in order. See §2 for what happens when a day is missed.
 
 Each day a SHA-256 hash is posted publicly to X and Reddit and anchored to the Bitcoin blockchain via OpenTimestamps. The contents behind that hash stay sealed until §3 releases them.
@@ -36,13 +44,12 @@ This runs on one machine. Power cuts, hardware failures and travel happen.
 
 - **Closed positions reveal.** Ninety days after exit, the line is published with its proof.
 - **Open positions stay sealed** — that is what paying members receive, stated plainly rather than dressed up.
-- **Everything else in a day's record**, including the running BTC total and the code fingerprints, reveals on the same 90-day schedule, tied to the day it was sealed.
+- **Everything else in a day's record**, including the running BTC total, the dollar equivalent, every idle-cash move and the code fingerprints, reveals on the same 90-day schedule, tied to the day it was sealed. *(the dollar equivalent and the idle-cash moves are new in this book)*
 - **Publication is continuous; promotion is quarterly.** Each item publishes to the public record automatically as it clears its 90 days — no batching, no waiting for a convenient date. Four times a year (1 January, 1 April, 1 July, 1 October) a consolidated page summarises everything revealed that quarter. **The quarterly page is an announcement, not a release**: nothing is withheld for it, and no item's publication ever waits on it. The first consolidated page is **1 January 2027**.
 - **Anti-hiding backstop.** Two rules stop a losing position being hidden by never closing it:
   1. **Any position still open 180 days after entry is revealed anyway**, while still held — named, not just counted in the aggregate.
      180 is chosen against the method's measured hold distribution rather than picked as a round number: across 196 closed historical positions the median hold is 27 days, the 99th percentile is 126 days, and the longest ever recorded is 211 days. A 180-day trigger therefore leaves essentially every legitimate hold undisturbed (1 in 196 would have reached it) while still being a threshold this method can actually cross. A longer trigger — 250 or 365 days — would never have fired on any position in the record, which would make it decoration rather than a safeguard. By the time it fires, the entry is six months old.
   2. **The running BTC total reveals on the normal 90-day schedule regardless** — and it includes the marks on open positions. Sealed losers therefore still show up in the aggregate, on time.
-- **Days 1 to 3 (17–19 September 2026)** were sealed before per-line commitments existed and can only be revealed whole. They publish once every position listed in them has closed and cleared 90 days, which will also expose what was open on those days. Stated in advance, deliberately.
 
 **I do not choose what to reveal. The rule decides.** A loss publishes on the same schedule as a win.
 
@@ -52,7 +59,7 @@ If I stop running the board, or stop publishing, **every reveal already owed is 
 
 ## 5. How a day is sealed
 
-1. The envelope is written: a plain-text file listing the date, the allocation, the code fingerprints, every open and closed position, and the BTC totals.
+1. The envelope is written: a plain-text file listing the date, the allocation, the code fingerprints, every open and closed position, and the BTC totals — the total beside its two parts, the realized total and the unrealized total (realized: the sum of the closed legs' returns, in BTC; unrealized: the open positions (a coin, or idle cash parked in dollars) marked against their entry prices, in BTC; the total is never shown without both). It also lists the cash position in Bitcoin and in dollars, the day's exchange rate and its source, each idle-cash move of the day, and the version of the method's private rulebook in force. *(the two parts and the last four are new in this book)*
 2. Each line becomes an **item**, hashed with its own 32-byte secret salt: `leaf = SHA256(salt ‖ item_text)`. Without salts, short lines like `ZEC - day 2 - +5.8%` could be brute-forced by enumeration; the salt is what makes a sealed line sealed.
 3. Leaves, in envelope order, form a **Merkle tree**. Odd level → the last node is duplicated.
 4. A **commitment file** records the SHA-256 of the whole envelope and the Merkle root.
@@ -66,17 +73,25 @@ The commitment file is not published **before** reveal, because its item names w
 
 ## 6. Known limits, stated rather than discovered
 
-- **Day 1 (18 September 2026) used stale prices.** Its entries for ZEC, UNI and CAKE were recorded at the **16 September 17:48 board prices**, two days old, because the automated noon chain had never successfully run — a misconfiguration found on 19 September. That day's stamp came from a manual run at 17:03 local, not the noon process the commitment describes. Every return computed from those entry prices inherits the discrepancy. **This note is repeated in the day-1 reveal itself**, so it appears wherever those numbers appear.
-- **Slot sizing on a refill** splits the current total evenly across the three slots. It is a track-record approximation, not per-slot compounding accounting, and the running total drifts slightly from a per-slot ledger over many rolls.
+- **Slot sizing on a refill** is per-slot compounding: a freed slot buys its next coin with the cash it came back with, so each slot's gains and losses carry into its next coin; when more than one slot is filled at the same noon, the cash on hand is split evenly across the slots being filled. While the idle cash is parked in dollars there is no refill. *(changed in this book: RULE.md 1.0 described an even split of the current total across the three slots; the ledger has compounded per slot since run 2)*
 - **Prices are the board's noon values**, not the exact exchange print at that minute.
-- **Days 1–3 (17, 18, 19 September 2026) use the older all-or-nothing structure** (§3) **and predate the code fingerprints**. The first envelope carrying a fingerprint is 20 September 2026. For those three days the method-change disclosure in §7 has nothing to rest on, and the code that produced them is evidenced only by the project's dated version history, which is weaker: I control that history. Treat the first three days as the least verifiable part of this record.
+- **The exchange rate for an idle-cash move** is one source's value at or before noon, not an exchange fill. A move's value in a later reveal is that rate and no other. *(new in this book)*
 
-## 7. Method changes
+## 7. Method changes — and the private rulebook
 
 The method may change. When it does, the envelope's **code fingerprints** — SHA-256 prefixes of the scanner, the backtester and the stamping script — change with it, and that is visible in the sealed record for the day it happened.
 
 - A change is **disclosed, not hidden**: the fingerprints are part of every envelope and reveal on the normal schedule.
 - The record therefore may span more than one version of the method. Where that matters to a revealed result, it will be stated in the reveal.
+
+*(new in this book, from here to the end of §7)*
+
+**The method's rules are private.** They are written in full in a **private rulebook** with its own version number. On genesis day the private rulebook is sealed exactly as a daily envelope is: each line salted and hashed, the lines formed into a Merkle tree, the commitment hashed. The hash of that commitment is printed in this book's footer and carried in the genesis envelope. That proves the rules existed on this date and have not changed since, without showing them. Each day's envelope names the version of the private rulebook in force.
+
+**Two kinds of change, and what each one does:**
+
+- **A change to how the method decides** (any rule held in the private rulebook) produces a new version of the private rulebook, sealed the same way, and a new dated edition of this book carrying its hash, announced and anchored on the day it takes effect. **The run continues** from where it stands.
+- **A change to anything this book states** (the account and its three slots, the idle-cash condition, the denomination in Bitcoin, the gross record, or the rules for sealing, revealing and checking) **ends the run**. The run ends sealed at its last stamp, with every reveal it owes still owed, and a new run begins at 1.000 BTC under a new dated book.
 
 ## 8. How to check a reveal
 
@@ -103,7 +118,8 @@ Published verification instructions accompany each reveal. If a browser-based ve
 
 ---
 
-**Rule version:** 1.0 — the first published version of this rule (drafts v1–v4 were pre-publication and were never anchored)
+**Rule version:** 2.0, dated 18 October 2026
 **Effective:** the first stamp after this document's hash is anchored
 **Anchored:** SHA-256 of this file, posted to X and Reddit and timestamped to Bitcoin
-**Supersedes:** nothing. Days 1–3 keep the structure they were sealed with.
+**Supersedes:** RULE.md 1.0, for run 3 onward. Every day sealed before run 3's genesis keeps the rule it was sealed under.
+**Private rulebook hash:** 4005ee2143768519ee7a8608ad578fb2bf24ece831461b7ff2ee6d7a2a2e4f96

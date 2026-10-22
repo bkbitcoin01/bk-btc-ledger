@@ -37,6 +37,7 @@ The full rule is in **[RULE.md](RULE.md)**. Its hash is anchored to Bitcoin, so 
 |---|---|
 | `RULE.md` | The rule, as anchored. Its SHA-256 is published and timestamped to Bitcoin |
 | `RULE.md.ots` | The OpenTimestamps proof for `RULE.md` |
+| `RULE-1.0.md` | The rule every day from 17 September 2026 to 21 October 2026 was sealed under, with its proof `RULE-1.0.md.ots` |
 | `VERIFY.md` | How to check any of this yourself, in three levels of effort |
 | `HASHES.md` | Every daily posted hash, in order, from genesis |
 | `2026/` | Reveals and commitment files for 2026, published as they clear the schedule |
